@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="itemRight">
-          <svg class="icon bofang" aria-hidden="true" v-if='item.mv !=0'>
+          <svg class="icon bofang" aria-hidden="true" v-if="item.mv != 0">
             <use xlink:href="#icon-shipin"></use>
           </svg>
           <svg class="icon liebiao" aria-hidden="true">
@@ -40,19 +40,19 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 export default {
   setup(props) {
-    console.log(props);
+    // console.log(props);
   },
   props: ["itemList", "subscribedCount"],
-  methods:{
-    playMusic:function(i){
-      this.updatePlayList(this.itemList)
-      this.updatePlayListIndex(i)
+  methods: {
+    playMusic: function (i) {
+      this.updatePlayList(this.itemList);
+      this.updatePlayListIndex(i);
     },
-    ...mapMutations(['updatePlayList','updatePlayListIndex'])
-  }
+    ...mapMutations(["updatePlayList", "updatePlayListIndex"]),
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -127,38 +127,38 @@ export default {
         div {
           p {
             width: 4.54rem;
-            height: .4rem;
+            height: 0.4rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             font-weight: 700;
           }
-          span{
+          span {
             font-weight: 400;
-            font-size: .24rem;
+            font-size: 0.24rem;
             color: #999;
           }
           margin-left: 0.3rem;
         }
       }
-      .itemRight{
+      .itemRight {
         width: 20%;
         height: 100%;
         display: flex;
         // justify-content: space-between;
         align-items: center;
         position: relative;
-        .icon{
+        .icon {
           fill: #999;
         }
-         .bofang{
-            position: absolute;
-            left: 0;
-          }
-         .liebiao{
-            position: absolute;
-            right: 0;
-          }
+        .bofang {
+          position: absolute;
+          left: 0;
+        }
+        .liebiao {
+          position: absolute;
+          right: 0;
+        }
       }
     }
   }

@@ -68,7 +68,14 @@
       </svg>
     </div>
     <div class="footerContent">
-      <input type="range" class="range" min="0" :max="duration" v-model="currentTime" step="0.05">
+      <input
+        type="range"
+        class="range"
+        min="0"
+        :max="duration"
+        v-model="currentTime"
+        step="0.05"
+      />
     </div>
     <div class="footer">
       <svg class="icon" aria-hidden="true">
@@ -108,7 +115,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(["lyricList", "currentTime", "playListIndex", "playList",'duration']),
+    ...mapState([
+      "lyricList",
+      "currentTime",
+      "playListIndex",
+      "playList",
+      "duration",
+    ]),
     lyric: function () {
       let arr;
       if (this.lyricList.lyric) {
@@ -136,16 +149,16 @@ export default {
           }
         });
       }
-      console.log(arr);
+      // console.log(arr);
       return arr;
     },
   },
   mounted() {
     // console.log(this.musicList);
     // console.log(this.lyricList.lyric);
-    this.addDuration()
+    this.addDuration();
   },
-  props: ["musicList", "isbtnShow", "play","addDuration"],
+  props: ["musicList", "isbtnShow", "play", "addDuration"],
   methods: {
     backHome: function () {
       this.isLyricShow = false;
@@ -171,13 +184,12 @@ export default {
           this.$refs.musicLyric.scrollTop = p.offsetTop - 300;
         }
       }
-      if(newValue===this.duration){
-       
-        if(this.playListIndex===this.playList.length-1){
+      if (newValue === this.duration) {
+        if (this.playListIndex === this.playList.length - 1) {
           this.updatePlayListIndex(0);
-          this.play()
-        }else{
-           this.updatePlayListIndex(this.playListIndex+1);
+          this.play();
+        } else {
+          this.updatePlayListIndex(this.playListIndex + 1);
         }
       }
       // console.log([this.$refs.musicLyric])

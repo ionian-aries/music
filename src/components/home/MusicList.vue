@@ -12,15 +12,15 @@
         :show-indicators="false"
       >
         <van-swipe-item v-for="item in state.musicList" :key="item">
-          <router-link :to="{path:'/itemMusic',query:{id:item.id}}">
-          <img :src="item.picUrl" alt="" />
-          <span class="playCount">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-gl-play-copy"></use>
-            </svg>
-            {{ changeCount(item.playCount) }}
-          </span>
-          <span class="name">{{ item.name }}</span>
+          <router-link :to="{ path: '/itemMusic', query: { id: item.id } }">
+            <img :src="item.picUrl" alt="" />
+            <span class="playCount">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-gl-play-copy"></use>
+              </svg>
+              {{ changeCount(item.playCount) }}
+            </span>
+            <span class="name">{{ item.name }}</span>
           </router-link>
         </van-swipe-item>
       </van-swipe>
@@ -68,10 +68,10 @@ export default {
     }
     onMounted(async () => {
       let res = await getMusicList();
-      console.log(res);
+      // console.log(res);
       state.musicList = res.data.result;
     });
-    return { state,changeCount };
+    return { state, changeCount };
   },
 };
 </script>

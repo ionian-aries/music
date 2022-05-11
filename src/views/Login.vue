@@ -21,33 +21,36 @@
   </div>
 </template>
 <script>
-import {getLoginUser} from '@/request/api/home.js'
+import { getLoginUser } from "@/request/api/home.js";
 export default {
-    data(){
-        return{
-            phone:'',
-            password:''
-        }
+  data() {
+    return {
+      phone: "",
+      password: "",
+    };
+  },
+  methods: {
+    Login: async function () {
+      let res = await this.$store.dispatch("getLogin", {
+        phone: this.phone,
+        password: this.password,
+      });
+      // console.log(res);
+      if (res.data.code === 200) {
+        //如果返回的code等于200，说明登录成功，就跳转个人中心页面
+        this.$store.commit("updateIsLogin", true);
+        this.$store.commit("updateToken", res.data.token);
+        let result = await getLoginUser(res.data.account.id);
+        // console.log(result);
+        this.$store.commit("updateUser", result);
+        this.$router.push("/infoUser");
+      } else {
+        alert("手机号码或者密码错误");
+        this.password = "";
+      }
     },
-    methods:{
-        Login:async function(){
-          let res= await this.$store.dispatch('getLogin',{phone:this.phone,password:this.password})
-          console.log(res);
-          if(res.data.code===200){//如果返回的code等于200，说明登录成功，就跳转个人中心页面
-          this.$store.commit('updateIsLogin',true)
-          this.$store.commit('updateToken',res.data.token)
-          let result=await getLoginUser(res.data.account.id)
-          console.log(result);
-          this.$store.commit('updateUser',result)
-          this.$router.push('/infoUser')
-          }else{
-              alert("手机号码或者密码错误")
-              this.password=''
-          }
-        }
-    }
-
-}
+  },
+};
 </script>
 <style lang="less" scoped>
 .login {
@@ -77,9 +80,9 @@ export default {
       height: 1rem;
       border: 0.02rem solid #999;
     }
-    .btn{
-        width: 2rem;
-        height: .6rem;
+    .btn {
+      width: 2rem;
+      height: 0.6rem;
     }
   }
 }

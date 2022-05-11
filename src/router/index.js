@@ -1,70 +1,70 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import store from '@/store/index.js'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import store from "@/store/index.js";
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
+    path: "/itemMusic",
+    name: "ItemMusic",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "itemMusic" */ "../views/ItemMusic.vue"),
   },
   {
-    path: '/itemMusic',
-    name: 'ItemMusic',
+    path: "/search",
+    name: "Search",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "itemMusic" */ '../views/ItemMusic.vue')
+    component: () =>
+      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
   },
   {
-    path: '/search',
-    name: 'Search',
+    path: "/login",
+    name: "Login",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
   {
-    path: '/login',
-    name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
-  },
-  {
-    path: '/infoUser',
-    name: 'InfoUser',
-    beforeEnter:(to,from,next)=>{
-      if(store.state.isLogin || store.state.token || localStorage.getItem('token')){
-        next()
-      }else{
-        next('/login')
+    path: "/infoUser",
+    name: "InfoUser",
+    beforeEnter: (to, from, next) => {
+      if (
+        store.state.isLogin ||
+        store.state.token ||
+        localStorage.getItem("token")
+      ) {
+        next();
+      } else {
+        next("/login");
       }
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "infoUser" */ '../views/InfoUser.vue')
-  }
-]
+    component: () =>
+      import(/* webpackChunkName: "infoUser" */ "../views/InfoUser.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
-router.beforeEach((to,from)=>{
-  if(to.path=='/login'){
-    store.state.isFooterMusic=false
-  }else{
-    store.state.isFooterMusic=true
+  routes,
+});
+router.beforeEach((to, from) => {
+  if (to.path == "/login") {
+    store.state.isFooterMusic = false;
+  } else {
+    store.state.isFooterMusic = true;
   }
-})
-export default router
+});
+export default router;
